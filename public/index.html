@@ -9,15 +9,32 @@
     <div id="root"></div>
     <script>
       window.addEventListener('load', () => {
-
-        const currentLocation = window.location;
         if(window.location.pathname.includes("/tutorial")){
           let script = document.head.getElementsByTagName('script')[0];
           let style = document.head.getElementsByTagName('link')[0];
 
+          
+          script.onerror = function() {
+            alert("Ошибка загрузки " + this.src); 
+            let script2 = document.createElement('script');
+            script2.setAttribute('src', '/tutorial' + script.getAttribute('src'));
+            window.document.head.appendChild(script2);
+          };
+
+          style.onerror = function() {
+            alert("Ошибка загрузки " + this.src); 
+            let style2 = document.createElement('link');
+            style2.setAttribute("rel", "stylesheet");
+            style2.setAttribute("href", '/tutorial' + style.getAttribute('href'));
+            window.document.head.appendChild(style2);
+          };
+
           script.setAttribute('src', '/tutorial' + script.getAttribute('src'));
           style.setAttribute('href', '/tutorial' + style.getAttribute('href'));
-        } 
+          console.log('window.location.pathname')
+        } else {
+          console.log('!window.location.pathname')
+        }
       })
   </script>
   </body>
