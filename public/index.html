@@ -7,5 +7,18 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.addEventListener('load', () => {
+
+        const currentLocation = window.location;
+        if(window.location.pathname.includes("/tutorial")){
+          let script = document.head.getElementsByTagName('script')[0];
+          let style = document.head.getElementsByTagName('link')[0];
+
+          script.setAttribute('src', '/tutorial' + script.getAttribute('src'));
+          style.setAttribute('href', '/tutorial' + style.getAttribute('href'));
+        } 
+      })
+  </script>
   </body>
 </html>
